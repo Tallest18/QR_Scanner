@@ -3,7 +3,6 @@ import { Link } from "expo-router";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 const Index = () => {
   const [permission, requestPermission] = useCameraPermissions();
 
@@ -40,6 +39,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-around",
     alignItems: "center",
+    padding: 80,
   },
   title: {
     fontSize: 40,
