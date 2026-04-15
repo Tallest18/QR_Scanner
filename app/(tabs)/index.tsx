@@ -1,10 +1,10 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import {useCameraPermissions} from 'expo-camera'
+import { useCameraPermissions } from "expo-camera";
+import { Link } from "expo-router";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Index = () => {
-
   const [permission, requestPermission] = useCameraPermissions();
 
   const ispermissionGranted = Boolean(permission?.granted);
@@ -12,34 +12,43 @@ const Index = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>QR Code Scanner</Text>
-      <View style={{gap: 20}}>
+      <View style={{ gap: 20 }}>
         <TouchableOpacity onPress={requestPermission}>
-          <Text style={styles.button}>Request Permission</Text> 
+          <Text style={styles.button}>Request Permission</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {alert('Scanning QR Code')}} disabled={!ispermissionGranted}>
-          <Text style={[styles.button, { opacity: ispermissionGranted ? 1 : 0.5 }]}>Scan QR Code</Text> 
-        </TouchableOpacity>
+        <Link href={"/scanner"} asChild>
+          <TouchableOpacity disabled={!ispermissionGranted}>
+            <Text
+              style={[
+                styles.button,
+                { opacity: ispermissionGranted ? 1 : 0.5 },
+              ]}
+            >
+              Scan QR Code
+            </Text>
+          </TouchableOpacity>
+        </Link>
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    justifyContent: "space-around",
+    alignItems: "center",
   },
   title: {
     fontSize: 40,
-    fontWeight: 'bold',
-    color: 'black',
+    fontWeight: "bold",
+    color: "black",
   },
   button: {
     fontSize: 18,
-    color: 'blue',
+    color: "blue",
     textAlign: "center",
   },
-})
+});
